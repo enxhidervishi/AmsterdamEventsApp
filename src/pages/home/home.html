@@ -27,7 +27,7 @@
                        <ion-col col-8>
                           <span (click) = "openDetails(event)">
                              <h4>{{event.title}}</h4>
-                             <p>{{event.dateTime}}</p>
+                             <p>{{event.dateTime.toDateString()}} at {{event.dateTime.getHours()}}:{{event.dateTime.getMinutes()}}</p>
                              <div class="avatarDiv">
                                 <ion-col col-4>
                                    <ion-avatar class="firstAvatar" >
@@ -73,7 +73,7 @@
                        <ion-col col-7>
                           <span (click) = "openDetails(event)">
                              <h4 class="eventTitle">{{event.title}}</h4>
-                             <p>{{event.dateTime}}</p>
+                             <p>{{event.dateTime.toDateString()}} at {{event.dateTime.getHours()}}:{{event.dateTime.getMinutes()}}</p>
                              <div class="avatarDiv">
                                 <ion-col col-4>
                                    <ion-avatar class="firstAvatar" >
@@ -111,7 +111,7 @@
                  <ion-label class="labelText">OTHER</ion-label>
               </ion-list-header>
               <div *ngIf = "otherCount != 0">
-                 <ion-item ion-item *ngFor="let event of events; index as i;">
+                 <ion-item ion-item *ngFor="let event of events; index as i;" [class.returnedItem] = "returnedData == event.id">
                     <ion-row>
                        <ion-col col-4 (click) = "openDetails(event)">
                           <img class="image" [src] = "event.image">
@@ -119,7 +119,7 @@
                        <ion-col col-8>
                           <span (click) = "openDetails(event)">
                              <h4 class="eventTitle">{{event.title}}</h4>
-                             <p>{{event.dateTime}}</p>
+                             <p>{{event.dateTime.toDateString()}} at {{event.dateTime.getHours()}}:{{event.dateTime.getMinutes()}}</p>
                              <div class="avatarDiv">
                                 <ion-col col-4>
                                    <ion-avatar class="firstAvatar" >
@@ -159,7 +159,7 @@
                  No Events
               </ion-card-header>
               <ion-card-content>
-                 There are no events that match this name.
+                 There are no events.
               </ion-card-content>
            </ion-card>
         </div>

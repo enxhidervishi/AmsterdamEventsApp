@@ -5,7 +5,7 @@
  <ion-content class="wrapper">
     <ion-content>
        <div>
-          <ion-icon class="backButton" ios="ios-arrow-back" md="md-arrow-back" (click)="goBack()"></ion-icon>
+          <ion-icon class="backButton" ios="ios-arrow-back" md="md-arrow-back" (click)="goBack($event)"></ion-icon>
           <img class="image" [src]="event.image" />
        </div>
        <div>
@@ -15,7 +15,7 @@
        </div>
        <div class="dateDiv">
           <ion-icon class="iconStyle" ios="ios-time" md="md-time"></ion-icon>
-          <p class="detailStyle">{{date}} , {{time}}</p>
+          <p class="detailStyle">{{date}} at {{time}}</p>
        </div>
        <div class="locationDiv">
           <ion-icon class="iconStyle" ios="ios-pin" md="md-pin"></ion-icon>

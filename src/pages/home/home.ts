@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 import { EventsProvider } from '../../providers/events/events';
 import { AlertController } from 'ionic-angular';
@@ -17,34 +17,34 @@ export class HomePage {
   thisWeekCount = 0;
   otherCount = 0;
 
-  constructor(public navCtrl: NavController, public eventsProvider: EventsProvider, public alertCtrl: AlertController) {
+  returnedData = 0;
+  callback: any;
+
+  loading: any;
+
+  constructor(
+    public navCtrl: NavController,
+    public eventsProvider: EventsProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
+  ) {
+
+    this.loading = this.loadingCtrl.create({
+      spinner: 'circles',
+    });
+
+    this.loading.present();
+
     this.eventsProvider.getEvents()
       .subscribe(eventsDetails => {
 
         this.results = eventsDetails;
 
-        this.results.forEach(event => {
-          //formating the date to create the Date object
-          let data = event.dateTime.split("-");
-          let yearHour = data[2].split(" ");
-          let newDate = new Date(data[1] + "/" + data[0] + "/" + yearHour[0] + " " + yearHour[1]);
-
-          let category = this.checkCategory(newDate);
-
-          this.events.push({
-            id: event.id,
-            title: event.title,
-            description: event.description,
-            dateTime: newDate,
-            category: category,
-            image: event.image,
-            status: event.status,
-            members: event.members
-          })
-        });
-        this.initializeEvents();
+        this.results ? this.initializeEvents() : (this.events = [], this.loading.dismiss());
       },
         error => {
+          this.events = [];
+          this.loading.dismiss();
           console.log("do something with the error: ", error);
           this.showAlert();
         }
@@ -55,7 +55,27 @@ export class HomePage {
   }
 
   initializeEvents() {
-    this.events = this.results;
+    this.results.forEach(event => {
+
+      //formating the date to create the Date object
+      let data = event.dateTime.split("-");
+      let yearHour = data[2].split(" ");
+      let newDate = new Date(data[1] + "/" + data[0] + "/" + yearHour[0] + " " + yearHour[1]);
+
+      let category = this.checkCategory(newDate);
+
+      this.events.push({
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        dateTime: newDate,
+        category: category,
+        image: event.image,
+        status: event.status,
+        members: event.members
+      })
+    });
+    this.loading.dismiss();
   }
 
   showAlert() {
@@ -110,6 +130,18 @@ export class HomePage {
   }
 
   openDetails(event) {
-    this.navCtrl.push('EventDetailsPage', { event: event });
+    this.navCtrl.push('EventDetailsPage',
+      {
+        event: event,
+        callback: this.getData
+      });
   }
+
+  getData = (data) => {
+    return new Promise((resolve, reject) => {
+      this.returnedData = parseInt(data.id);
+      console.log("test:", this.returnedData)
+      resolve();
+    });
+  };
 }

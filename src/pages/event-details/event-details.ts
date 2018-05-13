@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -10,23 +10,38 @@ import * as moment from 'moment';
 })
 export class EventDetailsPage {
 
-  event: any;
+  event: any = [];
   today = new Date();
   date: string;
   time: string;
+  callback: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public platform: Platform
+  ) {
     this.event = this.navParams.get('event');
-    this.date = moment(this.event.dateTime).calendar(this.today);
-    let t = this.event.dateTime.split(" ");
-    this.time = t[1].substring(0, 5);
+    this.callback = this.navParams.get('callback');
+
+    this.date = this.event.dateTime.toDateString(); //moment(this.event.dateTime).calendar(this.today);
+    this.time = this.event.dateTime.getHours() + ":" + this.event.dateTime.getMinutes();
   }
 
   ionViewDidLoad() {
+    this.platform.registerBackButtonAction(() => {
+      if (this.navCtrl.canGoBack()) {
+        this.callback(this.event).then(() => { this.navCtrl.pop() });
+      }
+      else {
+        this.platform.exitApp();
+      }
+    });
   }
 
-  goBack(){
-    this.navCtrl.pop();
+  goBack(event: any): void {
+    this.callback(this.event)
+      .then(() => {
+        this.navCtrl.pop();
+      });
   }
-
 }
