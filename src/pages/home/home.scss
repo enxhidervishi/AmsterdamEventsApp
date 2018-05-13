@@ -1,0 +1,80 @@
+page-home {
+
+    h4{
+        text-transform: uppercase;
+        font-weight: bold !important;
+    }
+
+    .eventTitle {
+        font-size: 15px;
+    }
+
+    .notSelected{
+        color: black;
+        background: lightgray;
+    }
+
+    .notSelected:hover{
+        color: black;
+        background: lightgray !important;
+    }
+
+    .going{
+        color: black;
+        background: orange;
+    }
+
+    .going:hover{
+        color: black;
+        background: orange !important;
+    }
+
+    .labelCategory{
+        background: orange;
+        width: 30% !important;
+        color: black;
+        font-weight: bold;
+        font-style: italic;
+        margin-left: -20px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+
+    .labelText{
+        margin-left: 14px;
+    }
+
+    .cardClass{
+        margin-bottom: 27px;
+    }
+
+    .avatarDiv {
+        display: flex;
+    }
+
+    .firstAvatar{
+        padding: 3px;
+    }
+
+    .secondAvatar{
+        margin-left: -30px;
+        padding: 3px;
+    }
+
+    .members{
+        font-weight: bold;
+        margin-top: 13px;
+        margin-left: -36px;
+        font-size: 15px;
+    }
+
+    .image{
+        height: 120px;
+        width: 100px;
+    }
+
+    .button{
+        height: 28px;
+    }
+
+}

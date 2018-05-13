@@ -1,0 +1,101 @@
+page-event-details {
+
+    .image {
+        margin-top: -26px;
+        z-index: -1;
+        position: relative;
+    }
+
+    .backButton {
+        color: grey;
+         margin-left: 8px;
+        margin-top: 8px;
+    }
+
+    label {
+        color: grey;
+        font-size: 14px;
+        margin-left: 30px;
+    }
+
+    .title {
+        text-transform: uppercase;
+        font-weight: bold !important;
+        font-size: 24px !important;
+        text-align: center;
+        color: black !important;
+        font-weight: bolder;
+    }
+
+    .detailStyle {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .iconStyle {
+        margin-left: 15px;
+    }
+
+    .dateDiv {
+        margin-left: 15px;
+    }
+
+    .locationDiv {
+        margin-top: -20px;
+        margin-left: 15px;
+    }
+
+    .circle-pic {
+        width:50px;
+        height:50px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background: white !important;  
+        padding: 3px;
+    }
+
+    .avatarDiv {
+        display: flex; 
+        margin-left: 50px;
+    }
+
+    .avatarStyle {
+        margin-left: -21px;
+    }
+
+    .others {
+        background-color: orange !important;
+        margin-left: 90px;
+        margin-top: 2px;
+    }
+
+    .memberLabel {
+        margin-left: 10px;
+        color: black;
+        margin-top: 12px !important;
+    }
+
+    .greyColor {
+        color: grey;
+        text-align: center !important;
+    }
+
+    .likeIcon {
+        color: green;
+        margin-left: 18px;
+    }
+
+    .description {
+        margin-left: 27px;
+    }
+
+    .inputMessage {
+        width: 100% !important;
+        margin-left: 0;
+        padding: 5px;
+    }
+
+    .wrapper {
+        overflow: hidden !important;
+    }
+}

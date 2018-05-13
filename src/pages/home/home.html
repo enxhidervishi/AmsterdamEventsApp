@@ -1,0 +1,166 @@
+<ion-header>
+        <ion-navbar>
+           <ion-title text-center>
+              Events
+           </ion-title>
+        </ion-navbar>
+     </ion-header>
+     <ion-content padding>
+        <ion-searchbar 
+        text-center
+        placeholder = "Search event"
+        (ionInput)= "getEvents($event)"
+        [animated] = "true"
+        >
+        </ion-searchbar>
+        <div *ngIf = "events.length != 0">
+           <ion-list>
+              <ion-list-header class="labelCategory">
+                 <ion-label class="labelText">TODAY</ion-label>
+              </ion-list-header>
+              <div *ngIf = "todayCount != 0">
+                 <ion-item ion-item *ngFor="let event of events; index as i;" >
+                    <ion-row>
+                       <ion-col col-4 (click) = "openDetails(event)">
+                          <img class="image" [src] = "event.image">
+                       </ion-col>
+                       <ion-col col-8>
+                          <span (click) = "openDetails(event)">
+                             <h4>{{event.title}}</h4>
+                             <p>{{event.dateTime}}</p>
+                             <div class="avatarDiv">
+                                <ion-col col-4>
+                                   <ion-avatar class="firstAvatar" >
+                                      <img [src] = "event.members[0].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4>
+                                   <ion-avatar class="secondAvatar">
+                                      <img [src] = "event.members[1].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4 *ngIf="event.members.length > 2">
+                                   <p class="members">+ {{event.members.length - 2}} others </p>
+                                </ion-col>
+                             </div>
+                          </span>
+                          <button ion-button icon-left class="button" *ngIf="event.status != 'ignore'" [class.going] = "event.status == 'going'" [class.notSelected] = "event.status == 'none'" (click) = "onGoingClick(i)">
+                          <ion-icon name="checkmark" *ngIf="event.status == 'going'"></ion-icon>
+                          Going</button> 
+                          <button class="button" *ngIf="event.status != 'going'" ion-button color="light" (click) = "onIgnoreClick(i)">Ignore</button>
+                       </ion-col>
+                    </ion-row>
+                 </ion-item>
+              </div>
+              <div *ngIf = "todayCount == 0">
+                 <ion-card class="cardClass">
+                    <ion-card-content>
+                       There are no events today.
+                    </ion-card-content>
+                 </ion-card>
+              </div>
+           </ion-list>
+           <ion-list>
+              <ion-list-header class="labelCategory">
+                 <ion-label class="labelText">THIS WEEK</ion-label>
+              </ion-list-header>
+              <div *ngIf = "thisWeekCount != 0">
+                 <ion-item ion-item *ngFor="let event of events; index as i;">
+                    <ion-row>
+                       <ion-col col-5 (click) = "openDetails(event)">
+                          <img class="image" [src] = "event.image">
+                       </ion-col>
+                       <ion-col col-7>
+                          <span (click) = "openDetails(event)">
+                             <h4 class="eventTitle">{{event.title}}</h4>
+                             <p>{{event.dateTime}}</p>
+                             <div class="avatarDiv">
+                                <ion-col col-4>
+                                   <ion-avatar class="firstAvatar" >
+                                      <img [src] = "event.members[0].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4>
+                                   <ion-avatar class="secondAvatar">
+                                      <img [src] = "event.members[1].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4 *ngIf="event.members.length > 2">
+                                   <p class="members">+ {{event.members.length - 2}} others </p>
+                                </ion-col>
+                             </div>
+                          </span>
+                          <button ion-button icon-left class="button" *ngIf="event.status != 'ignore'" [class.going] = "event.status == 'going'" [class.notSelected] = "event.status == 'none'" (click) = "onGoingClick(i)">
+                          <ion-icon name="checkmark" *ngIf="event.status == 'going'"></ion-icon>
+                          Going</button> 
+                          <button class="button" *ngIf="event.status != 'going'" ion-button color="light" (click) = "onIgnoreClick(i)">Ignore</button>
+                       </ion-col>
+                    </ion-row>
+                 </ion-item>
+              </div>
+              <div *ngIf = "thisWeekCount == 0">
+                 <ion-card class="cardClass">
+                    <ion-card-content>
+                       There are no events this week.
+                    </ion-card-content>
+                 </ion-card>
+              </div>
+           </ion-list>
+           <ion-list>
+              <ion-list-header class="labelCategory">
+                 <ion-label class="labelText">OTHER</ion-label>
+              </ion-list-header>
+              <div *ngIf = "otherCount != 0">
+                 <ion-item ion-item *ngFor="let event of events; index as i;">
+                    <ion-row>
+                       <ion-col col-4 (click) = "openDetails(event)">
+                          <img class="image" [src] = "event.image">
+                       </ion-col>
+                       <ion-col col-8>
+                          <span (click) = "openDetails(event)">
+                             <h4 class="eventTitle">{{event.title}}</h4>
+                             <p>{{event.dateTime}}</p>
+                             <div class="avatarDiv">
+                                <ion-col col-4>
+                                   <ion-avatar class="firstAvatar" >
+                                      <img [src] = "event.members[0].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4>
+                                   <ion-avatar class="secondAvatar">
+                                      <img [src] = "event.members[1].photo">
+                                   </ion-avatar>
+                                </ion-col>
+                                <ion-col col-4 *ngIf="event.members.length > 2">
+                                   <p class="members">+ {{event.members.length - 2}} others </p>
+                                </ion-col>
+                             </div>
+                          </span>
+                          <button ion-button icon-left class="button" *ngIf="event.status != 'ignore'" [class.going] = "event.status == 'going'" [class.notSelected] = "event.status == 'none'" (click) = "onGoingClick(i)">
+                          <ion-icon name="checkmark" *ngIf="event.status == 'going'"></ion-icon>
+                          Going</button> 
+                          <button class="button" *ngIf="event.status != 'going'" ion-button color="light" (click) = "onIgnoreClick(i)">Ignore</button>
+                       </ion-col>
+                    </ion-row>
+                 </ion-item>
+              </div>
+              <div *ngIf = "otherCount == 0">
+                 <ion-card class="cardClass">
+                    <ion-card-content>
+                       There are no events later than this week.
+                    </ion-card-content>
+                 </ion-card>
+              </div>
+           </ion-list>
+        </div>
+        <div *ngIf = "events.length == 0">
+           <ion-card>
+              <ion-card-header>
+                 No Events
+              </ion-card-header>
+              <ion-card-content>
+                 There are no events that match this name.
+              </ion-card-content>
+           </ion-card>
+        </div>
+     </ion-content>

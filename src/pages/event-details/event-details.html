@@ -1,0 +1,83 @@
+<!-- <ion-header> </ion-header>  -->
+<ion-navbar>
+    <!-- <ion-title>EventDetails</ion-title> -->
+ </ion-navbar>
+ <ion-content class="wrapper">
+    <ion-content>
+       <div>
+          <ion-icon class="backButton" ios="ios-arrow-back" md="md-arrow-back" (click)="goBack()"></ion-icon>
+          <img class="image" [src]="event.image" />
+       </div>
+       <div>
+          <ion-title class="title">{{event.title}}</ion-title>
+          <label>Public event</label>
+          <label>Hosted by TSH Amsterdam City</label>
+       </div>
+       <div class="dateDiv">
+          <ion-icon class="iconStyle" ios="ios-time" md="md-time"></ion-icon>
+          <p class="detailStyle">{{date}} , {{time}}</p>
+       </div>
+       <div class="locationDiv">
+          <ion-icon class="iconStyle" ios="ios-pin" md="md-pin"></ion-icon>
+          <p class="detailStyle"> Some location text here</p>
+       </div>
+       <div class="locationDiv">
+          <ion-icon class="iconStyle" ios="ios-speedometer" md="md-speedometer"></ion-icon>
+          <p class="detailStyle">{{event.members.length}} Going</p>
+       </div>
+       <div>
+          <div class="avatarDiv">
+             <ion-avatar class="avatarStyle" item-start *ngFor="let member of event.members; index as i;">
+                <img class="circle-pic" [src]="member.photo" *ngIf="i<8">
+             </ion-avatar>
+             <ion-avatar class="avatarStyle" item-end>
+                <p class="circle-pic others" *ngIf="event.members.length > 8">
+                   <label class="memberLabel">+ {{event.members.length - 8}}</label>
+                </p>
+             </ion-avatar>
+          </div>
+          <div class="description">
+             <p>{{event.description}}</p>
+          </div>
+          <ion-card class="inputMessage">
+             <div>
+                <ion-input type="text" placeholder="Leave a message ..."></ion-input>
+             </div>
+          </ion-card>
+       </div>
+       <ion-card>
+          <ion-item>
+             <ion-avatar item-start>
+                <img [src]="event.members[0].photo">
+             </ion-avatar>
+             <h2>John Doe</h2>
+             <p>November 5, 1955</p>
+          </ion-item>
+          <img [src]="event.image">
+          <ion-card-content>
+             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+             </p>
+          </ion-card-content>
+          <ion-row>
+             <div>
+                <ion-icon class="likeIcon" ios="ios-thumbs-up" md="md-thumbs-up">14</ion-icon>
+             </div>
+          </ion-row>
+          <ion-row>
+             <ion-col>
+                <button ion-button icon-left clear small class="greyColor">
+                   <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                   <div>Like</div>
+                </button>
+             </ion-col>
+             <ion-col>
+                <button ion-button icon-left clear small class="greyColor">
+                   <ion-icon name="text"></ion-icon>
+                   <div>Comment</div>
+                </button>
+             </ion-col>
+          </ion-row>
+       </ion-card>
+    </ion-content>
+ </ion-content>
