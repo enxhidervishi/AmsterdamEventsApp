@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { EventsProvider } from '../providers/events/events';
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [
