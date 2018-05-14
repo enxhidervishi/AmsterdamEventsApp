@@ -55,6 +55,8 @@ export class HomePage {
   }
 
   initializeEvents() {
+    
+    this.events = [];
     this.results.forEach(event => {
 
       //formating the date to create the Date object
